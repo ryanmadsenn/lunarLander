@@ -8,6 +8,7 @@
 #include "uiInteract.h"
 #include "uiDraw.h"
 #include "ground.h"
+#include <vector>
 using namespace std;
 
 /*************************************************************************
@@ -27,6 +28,18 @@ public:
       phase = random(0, 255);
    }
 
+   vector<Point> makeStars(int numStars) {
+       vector<Point> stars = {};
+
+       for (int x = 0; x < numStars; x++) {
+           Point tempPoint(random(0, 400), random(100, 500));
+           stars.push_back(tempPoint);
+       }
+
+       return stars;
+   }
+
+
    // this is just for test purposes.  Don't make member variables public!
    Point ptLM;           // location of the LM on the screen
    Point ptUpperRight;   // size of the screen
@@ -34,6 +47,7 @@ public:
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
    Point ptStar;
+   vector<Point> stars = makeStars(70);
 };
 
 /*************************************
@@ -64,8 +78,7 @@ void callBack(const Interface *pUI, void * p)
    if (pUI->isDown())
        pDemo->ptLM.addY(-1.0);
 
-   // draw the ground
-   pDemo->ground.draw(gout);
+
 
    // draw the lander and its flames
    gout.drawLander(pDemo->ptLM /*position*/, pDemo->angle /*angle*/);
@@ -76,8 +89,17 @@ void callBack(const Interface *pUI, void * p)
    gout.setPosition(Point(30.0, 30.0));
    gout << "Demo (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
-   // draw our little star
-   gout.drawStar(pDemo->ptStar, pDemo->phase++);
+   
+
+   for (auto star : pDemo->stars) {
+       cout << star << endl;
+
+       // draw our little stars
+       gout.drawStar(star, pDemo->phase++);
+   }
+
+   // draw the ground
+   pDemo->ground.draw(gout);
 }
 
 /*********************************
