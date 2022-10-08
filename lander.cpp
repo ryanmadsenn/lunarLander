@@ -10,7 +10,7 @@
 #include "lander.h"
 
 using namespace std;
-    lander::lander() : position(position), fuel(fuel), directionRadians(directionRadians), 
+    lander::lander() : position(position), fuel(2000.0), directionRadians(directionRadians), 
         velocityX(velocityX), velocityY(velocityY), totalVelocity(totalVelocity), thrust(thrust), weight(weight) {}
 
     void lander::Thrust() {}
@@ -35,4 +35,8 @@ using namespace std;
     double lander::getTotalVelocity() {
         return velocityY;
         }
+    
+    double lander::getFuel() {
+        return fuel; 
+    }
 

@@ -20,5 +20,5 @@ public:
     double getVelocityX(); 
     double getVelocityY(); 
     double getTotalVelocity(); 
-
+    double getFuel(); 
 };
