@@ -9,6 +9,7 @@
 #include "uiDraw.h"
 #include "ground.h"
 #include "lander.h"
+#include <vector>
 using namespace std;
 
 /*************************************************************************
@@ -29,6 +30,18 @@ public:
       phase = random(0, 255);
    }
 
+   vector<Point> makeStars(int numStars) {
+       vector<Point> stars = {};
+
+       for (int x = 0; x < numStars; x++) {
+           Point tempPoint(random(0, 400), random(100, 500));
+           stars.push_back(tempPoint);
+       }
+
+       return stars;
+   }
+
+
    // this is just for test purposes.  Don't make member variables public!
    Point ptLM;           // location of the LM on the screen
    Point ptUpperRight;   // size of the screen
@@ -36,9 +49,13 @@ public:
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
    Point ptStar;
+<<<<<<< HEAD
    Point ptText;
    lander newLander; 
 
+=======
+   vector<Point> stars = makeStars(70);
+>>>>>>> 33d9dc92317be6b9c4eda245efef5b6d5eadef07
 };
 
 /*************************************
@@ -69,8 +86,7 @@ void callBack(const Interface *pUI, void * p)
    if (pUI->isDown())
        pDemo->ptLM.addY(-1.0);
 
-   // draw the ground
-   pDemo->ground.draw(gout);
+
 
    // draw the lander and its flames
    gout.drawLander(pDemo->ptLM /*position*/, pDemo->angle /*angle*/);
@@ -81,6 +97,7 @@ void callBack(const Interface *pUI, void * p)
    gout.setPosition(Point(30.0, 30.0));
    gout << "Demo (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
+<<<<<<< HEAD
    // draw our little star
    gout.drawStar(pDemo->ptStar, pDemo->phase++);
    
@@ -95,6 +112,19 @@ void callBack(const Interface *pUI, void * p)
    //draw text for the velocity
    gout.setPosition(Point(10.0, 340.0)); 
    gout << "Speed: " << (int)pDemo->newLander.getTotalVelocity() << " m/s";
+=======
+   
+
+   for (auto star : pDemo->stars) {
+       cout << star << endl;
+
+       // draw our little stars
+       gout.drawStar(star, pDemo->phase++);
+   }
+
+   // draw the ground
+   pDemo->ground.draw(gout);
+>>>>>>> 33d9dc92317be6b9c4eda245efef5b6d5eadef07
 }
 
 /*********************************

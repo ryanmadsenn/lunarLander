@@ -67,14 +67,16 @@ public:
                                  double red = 1.0,
                                  double green = 1.0,
                                  double blue = 1.0) const;
+   
+   virtual void drawText(const Point& topLeft, const char* text) const;
+
 protected:
    Point pt;
    
 private:
    Point rotate(const Point & origin, double x, double y,
                 double rotation = 0.0) const;
-   
-   void drawText(const Point & topLeft, const char * text) const;
+  
 
 };
 
