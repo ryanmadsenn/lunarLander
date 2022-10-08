@@ -7,47 +7,32 @@
 
 #include <stdio.h>
 #include <iostream>
-#include "point.h"
+#include "lander.h"
 
 using namespace std;
+    lander::lander() : position(position), fuel(fuel), directionRadians(directionRadians), 
+        velocityX(velocityX), velocityY(velocityY), totalVelocity(totalVelocity), thrust(thrust), weight(weight) {}
 
-class lander {
-private:
-    Point position;
-    double fuel = 5000.0;
-    double directionRadians;
-    double velocityX;
-    double velocityY;
-    double totalVelocity;
-    double thrust;
-    double weight;
+    void lander::Thrust() {}
+    void lander::rotate() {}
+    
+    Point lander::getPosition() {
+        return position;
+        }
+    
+    double lander::getDirectionRadians() {
+        return directionRadians;
+        }
+    
+    double lander::getVelocityX() {
+        return velocityX;
+        }
+    
+    double lander::getVelocityY() {
+        return velocityY;
+        }
+    
+    double lander::getTotalVelocity() {
+        return velocityY;
+        }
 
-public:
-    void Thrust() {}
-    void rotate() {}
-    
-    Point getPostion() {
-        return this->position;
-    }
-    
-    double getDirectionRadians() {
-        return this->directionRadians;
-    }
-    
-    double getVelocityX() {
-        return this->velocityX;
-    }
-    
-    double getVelocityY() {
-        return this->velocityY;
-    }
-    
-    double getTotalVelocity() {
-        return this->velocityY;
-    }
-
-    
-    
-    
-    
-};
