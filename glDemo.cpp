@@ -8,6 +8,7 @@
 #include "uiInteract.h"
 #include "uiDraw.h"
 #include "ground.h"
+#include "lander.h"
 using namespace std;
 
 /*************************************************************************
@@ -17,11 +18,12 @@ using namespace std;
 class Demo
 {
 public:
-   Demo(const Point& ptUpperRight) :
-          angle(0.0),
-          ptStar(ptUpperRight.getX() - 20.0, ptUpperRight.getY() - 20.0),
-          ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
-          ground(ptUpperRight)
+    Demo(const Point& ptUpperRight) :
+        angle(0.0),
+        ptStar(ptUpperRight.getX() - 20.0, ptUpperRight.getY() - 20.0),
+        ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
+        ground(ptUpperRight),
+        ptText(ptUpperRight.getX() / 2.0, -ptUpperRight.getY() / 2.0)
    { 
 
       phase = random(0, 255);
@@ -34,6 +36,9 @@ public:
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
    Point ptStar;
+   Point ptText;
+   lander newLander; 
+
 };
 
 /*************************************
@@ -78,6 +83,18 @@ void callBack(const Interface *pUI, void * p)
 
    // draw our little star
    gout.drawStar(pDemo->ptStar, pDemo->phase++);
+   
+   //draw text for the altitude
+   gout.setPosition(Point(10.0, 360.0));
+   gout << "Altitude: " << (int)pDemo->ptLM.getY() << " meters";
+
+   //draw text for the fuel
+   gout.setPosition(Point(10.0, 380.0));
+   gout << "Fuel: " << (int)pDemo->newLander.getFuel() << " lbs";
+
+   //draw text for the velocity
+   gout.setPosition(Point(10.0, 340.0)); 
+   gout << "Speed: " << (int)pDemo->newLander.getTotalVelocity() << " m/s";
 }
 
 /*********************************
