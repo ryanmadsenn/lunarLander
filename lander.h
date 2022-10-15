@@ -56,6 +56,10 @@ public:
         return this->position;
     }
     
+    double getFuel() {
+        return this->fuel;
+    }
+
     double getDirectionRadians() {
         return this->directionRadians;
     }

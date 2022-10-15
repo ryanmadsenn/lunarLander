@@ -1,8 +1,17 @@
-/**********************************************************************
- * GL Demo
- * Just a simple program to demonstrate how to create an Open GL window, 
- * draw something on the window, and accept simple user input
- **********************************************************************/
+/*************************************************************
+ * 1. Name:
+ *      Jake Zalesny, Ryan Madsen, Jessica Johnson
+ * 2. Assignment Name:
+ *      Lab 04: Apollo 11 Visuals
+ * 3. Assignment Description:
+ *      Simulate the Apollo 11 landing
+ * 4. What was the hardest part? Be as specific as possible.
+ *      For us it was pretty difficult to coordinate with our team members and figure out
+ *      our exact approach on how we wanted to make the visuals work 
+ *      once we started communcating more frequently it went much better. 
+ * 5. How long did it take for you to complete the assignment?
+ *      3.5 hrs. 
+ *****************************************************************/
 
 #include "point.h"
 #include "uiInteract.h"
@@ -49,13 +58,9 @@ public:
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
    Point ptStar;
-<<<<<<< HEAD
    Point ptText;
    lander newLander; 
-
-=======
    vector<Point> stars = makeStars(70);
->>>>>>> 33d9dc92317be6b9c4eda245efef5b6d5eadef07
 };
 
 /*************************************
@@ -88,16 +93,10 @@ void callBack(const Interface *pUI, void * p)
 
 
 
-   // draw the lander and its flames
-   gout.drawLander(pDemo->ptLM /*position*/, pDemo->angle /*angle*/);
-   gout.drawLanderFlames(pDemo->ptLM, pDemo->angle, /*angle*/
-                    pUI->isDown(), pUI->isLeft(), pUI->isRight());
-
    // put some text on the screen
-   gout.setPosition(Point(30.0, 30.0));
-   gout << "Demo (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
+   //gout.setPosition(Point(30.0, 30.0));
+   //gout << "Demo (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
-<<<<<<< HEAD
    // draw our little star
    gout.drawStar(pDemo->ptStar, pDemo->phase++);
    
@@ -112,7 +111,6 @@ void callBack(const Interface *pUI, void * p)
    //draw text for the velocity
    gout.setPosition(Point(10.0, 340.0)); 
    gout << "Speed: " << (int)pDemo->newLander.getTotalVelocity() << " m/s";
-=======
    
 
    for (auto star : pDemo->stars) {
@@ -124,7 +122,11 @@ void callBack(const Interface *pUI, void * p)
 
    // draw the ground
    pDemo->ground.draw(gout);
->>>>>>> 33d9dc92317be6b9c4eda245efef5b6d5eadef07
+
+   // draw the lander and its flames
+   gout.drawLander(pDemo->ptLM /*position*/, pDemo->angle /*angle*/);
+   gout.drawLanderFlames(pDemo->ptLM, pDemo->angle, /*angle*/
+       pUI->isDown(), pUI->isLeft(), pUI->isRight());
 }
 
 /*********************************

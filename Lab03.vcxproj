@@ -19,14 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="computer.cpp" />
     <ClCompile Include="glDemo.cpp" />
     <ClCompile Include="ground.cpp" />
-    <ClCompile Include="lander.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="uiDraw.cpp" />
     <ClCompile Include="uiInteract.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Computer.h" />
     <ClInclude Include="ground.h" />
     <ClInclude Include="lander.h" />
     <ClInclude Include="point.h" />
