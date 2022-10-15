@@ -1,17 +1,9 @@
-/*************************************************************
- * 1. Name:
- *      Jake Zalesny, Ryan Madsen, Jessica Johnson
- * 2. Assignment Name:
- *      Lab 04: Apollo 11 Visuals
- * 3. Assignment Description:
- *      Simulate the Apollo 11 landing
- * 4. What was the hardest part? Be as specific as possible.
- *      For us it was pretty difficult to coordinate with our team members and figure out
- *      our exact approach on how we wanted to make the visuals work 
- *      once we started communcating more frequently it went much better. 
- * 5. How long did it take for you to complete the assignment?
- *      3.5 hrs. 
- *****************************************************************/
+/**********************************************************************
+ * GL Demo
+ * Just a simple program to demonstrate how to create an Open GL window, 
+ * draw something on the window, and accept simple user input
+ **********************************************************************/
+// push
 
 #include "point.h"
 #include "uiInteract.h"
