@@ -93,7 +93,7 @@ void drawCallback()
    
    //calls the client's display function
    assert(ui.callBack != NULL);
-   ui.callBack(&ui, ui.p);
+   ui.callBack(&ui, ui.p, ui.ground);
    
    //loop until the timer runs out
    if (!ui.isTimeToDraw())
@@ -254,7 +254,8 @@ bool         Interface::initialized  = false;
 double       Interface::timePeriod   = 1.0 / 30; // default to 30 frames/second
 unsigned long Interface::nextTick     = 0;        // redraw now please
 void *       Interface::p            = NULL;
-void (*Interface::callBack)(const Interface *, void *) = NULL;
+void *       Interface::ground       = NULL;
+void (*Interface::callBack)(const Interface *, void *, void *) = NULL;
 
 
 /************************************************************************
@@ -317,11 +318,13 @@ void Interface::initialize(int argc, char ** argv, const char * title, const Poi
  *                   will need to cast this back to your own data
  *                   type before using it.
  *************************************************************************/
-void Interface::run(void (*callBack)(const Interface *, void *), void *p)
+void Interface::run(void (*callBack)(const Interface *, void *, void *), void *p, void *ground)
 {
-   // setup the callbacks
-   this->p = p;
-   this->callBack = callBack;
+    // setup the callbacks
+    this->p = p;
+    this->callBack = callBack;
+    this->ground = ground;
+    
 
    glutMainLoop();
 

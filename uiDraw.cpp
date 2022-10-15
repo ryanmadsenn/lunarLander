@@ -239,6 +239,8 @@ void ogstream::drawRectangle(const Point& begin, const Point& end,
 void ogstream::drawLander(const Point& point, double angle)
 {
    // use the current point if the default parameter is used
+    angle *= -1;
+    
    if (point != Point())
       *this = point;
 
@@ -324,6 +326,8 @@ void ogstream::drawLanderFlames(const Point& point, double angle,
    bool clockwise,
    bool counterClockwise)
 {
+    angle *= -1;
+    
    // use the current point if the default parameter is used
    if (point != Point())
       *this = point;

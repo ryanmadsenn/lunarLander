@@ -1,93 +1,65 @@
 #pragma once
 #include "point.h"
 
-class lander {
-    
-    class computer {
-        double gravity = 1.625;
-        
-        void computeAccelerationThrust() {
-            
-        }
-        
-        void computeHorizontalComponent() {
-            
-        }
-        
-        void computeVerticalComponent() {
-            
-        }
-        
-        void computeVeloctiy() {
-            
-        }
-        
-        void computeDistance() {
-            
-        }
-        
-        void computeTotalVelocity() {
-            
-        }
-    };
-    
-    
+using namespace std;
+
+class Lander {
 private:
+    const double weight = 15103.000;
+    const double thrust = 45000.000;
+    const double gravity = -1.625;
     Point position;
     double fuel = 5000.0;
-    double directionRadians;
+    double angle = 0.0;
     double velocityX;
     double velocityY;
-    double totalVelocity;
-    double thrust = 45000;
-    double weight = 15103;
-    computer computer;
-    
     
     
 public:
-    lander() {}
+    Lander(Point position) {
+        this->position.setX(position.getX() / 2);
+        this->position.setY(position.getY() / 2);
+    }
     
-    void Thrust() {}
+    void applyThrust() {
+        velocityX += (sin(angle) * (thrust / weight)) / 10;
+        velocityY += (cos(angle) * (thrust / weight)) / 10;
+        fuel -= 10;
+    }
     
-    void rotate() {}
+    void applyInertia() {
+        position.addX(velocityX);
+        position.addY(velocityY);
+    }
+    
+    void applyGravity() {
+        velocityY += gravity / 10;
+    }
+    
+    void rotate(string direction) {
+        if (direction == "right") {
+            this->angle += 0.1;
+        } else if (direction == "left") {
+            this->angle -= 0.1;
+        }
+        
+        fuel -= 1;
+    }
     
     Point getPosition() {
         return this->position;
     }
     
-    double getFuel() {
-        return this->fuel;
-    }
-
-    double getDirectionRadians() {
-        return this->directionRadians;
-    }
-    
-    double getVelocityX() {
-        return this->velocityX;
-    }
-    
-    double getVelocityY() {
-        return this->velocityY;
+    double getAngle() {
+        return this->angle;
     }
     
     double getTotalVelocity() {
-        return this->totalVelocity;
+        return sqrt(velocityX * velocityX + velocityY * velocityY);
     }
     
-    double getWeight() {
-        return this->weight;
+    double getFuel() {
+        return this->fuel;
     }
-    
-    void setPosition() {}
-    
-    void setDirectionRadians() {}
-    
-    void setVelocityX() {}
-    
-    void setVelocityY() {}
-    
-    void setTotalVelocity() {}
     
 };
