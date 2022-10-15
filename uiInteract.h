@@ -41,7 +41,7 @@ public:
    }
 
    // This will set the game in motion
-   void run(void (*callBack)(const Interface *, void *), void *p);
+   void run(void (*callBack)(const Interface *, void *, void *), void *p, void *ground);
 
    // Is it time to redraw the screen
    bool isTimeToDraw();
@@ -71,7 +71,8 @@ public:
    bool isSpace()     const { return isSpacePress; };
    
    static void *p;                   // for client
-   static void (*callBack)(const Interface *, void *);
+    static void *ground;
+   static void (*callBack)(const Interface *, void *, void *);
 
 private:
    void initialize(int argc, char ** argv, const char * title, const Point & ptUpperRight);
