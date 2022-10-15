@@ -97,20 +97,21 @@ void callBack(const Interface *pUI, void *p, void *ground)
 
 
    // draw the lander and its flames
+   gout.setPosition(Point(200.0, 200.0));
    gout.drawLander(pLander->getPosition() /*position*/, pLander->getAngle() /*angle*/);
    gout.drawLanderFlames(pLander->getPosition(), pLander->getAngle(), /*angle*/
                     pUI->isUp(), pUI->isLeft(), pUI->isRight());
 
    // put some text on the screen
-   gout.setPosition(Point(30.0, 30.0));
-   gout << "Demo (" << (int)pLander->getPosition().getX() << ", " << (int)pLander->getPosition().getY() << ")" << "\n";
+   //gout.setPosition(Point(30.0, 30.0));
+   //gout << "Demo (" << (int)pLander->getPosition().getX() << ", " << (int)pLander->getPosition().getY() << ")" << "\n";
 
    // draw our little star
 //   gout.drawStar(pDemo->ptStar, pDemo->phase++);
    
    //draw text for the altitude
    gout.setPosition(Point(10.0, 360.0));
-   gout << "Altitude: " << (int)pLander->getPosition().getY() << " meters";
+   gout << "Altitude: " << pLander->getPosition().getY() << " meters";
 
    //draw text for the fuel
    gout.setPosition(Point(10.0, 380.0));
@@ -129,9 +130,18 @@ void callBack(const Interface *pUI, void *p, void *ground)
 
    // draw the ground
    pGround->draw(gout);
+
+   if (pGround->hitGround(pLander->getPosition(), 20)) {
+       gout.setPosition(Point(200.0, 320.0));
+       gout << "Houston we have a problem!";
+   }
+
+   else if (pGround->onPlatform(pLander->getPosition(), 20)) {
+       gout.setPosition(Point(200.0, 320.0));
+       gout << "Mission Accomplished!";
+   }
 }
 
-// Comment
 /*********************************
  * Main is pretty sparse.  Just initialize
  * my Demo type and call the display engine.
