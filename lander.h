@@ -8,7 +8,7 @@ private:
     const double weight = 15103.000;
     const double thrust = 45000.000;
     const double gravity = -1.625;
-    Point position;
+    Point position = Point(200.0, 200.0);
     double fuel = 5000.0;
     double angle = 0.0;
     double velocityX;
