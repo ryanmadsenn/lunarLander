@@ -41,7 +41,7 @@ public:
    }
 
    // This will set the game in motion
-   void run(void (*callBack)(const Interface *, void *, void *), void *p, void *ground);
+   void run(void (*callBack)(const Interface *, void *, void *, void *), void *p, void *ground, void *stars);
 
    // Is it time to redraw the screen
    bool isTimeToDraw();
@@ -72,7 +72,8 @@ public:
    
    static void *p;                   // for client
     static void *ground;
-   static void (*callBack)(const Interface *, void *, void *);
+    static void *stars;
+   static void (*callBack)(const Interface *, void *, void *, void *);
 
 private:
    void initialize(int argc, char ** argv, const char * title, const Point & ptUpperRight);
@@ -85,7 +86,7 @@ private:
    static int  isUpPress;            //    "   up         "
    static int  isLeftPress;          //    "   left       "
    static int  isRightPress;         //    "   right      "
-   static bool isSpacePress;         //    "   space      "
+   static int isSpacePress;         //    "   space      "
 };
 
 

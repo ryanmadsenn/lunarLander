@@ -13,17 +13,30 @@ private:
     double angle = 0.0;
     double velocityX;
     double velocityY;
+    bool isLanded = false;
+    
+    void setPosition(Point point) {
+        this->position = point;
+    }
+    
+    void setVelocityX(double velocityX) {
+        this->velocityX = velocityX;
+    }
+    
+    void setVelocityY(double velocityY) {
+        this->velocityY = velocityY;
+    }
     
     
 public:
     Lander(Point position) {
-        this->position.setX(position.getX() / 2);
-        this->position.setY(position.getY() / 2);
+        this->position.setX(position.getX());
+        this->position.setY(position.getY());
     }
     
     void applyThrust() {
-        velocityX += (sin(angle) * (thrust / weight)) / 10;
-        velocityY += (cos(angle) * (thrust / weight)) / 10;
+        velocityX += (sin(angle) * (thrust / weight)) / 30;
+        velocityY += (cos(angle) * (thrust / weight)) / 30;
         fuel -= 10;
     }
     
@@ -33,7 +46,7 @@ public:
     }
     
     void applyGravity() {
-        velocityY += gravity / 10;
+        velocityY += gravity / 30;
     }
     
     void rotate(string direction) {
@@ -62,4 +75,25 @@ public:
         return this->fuel;
     }
     
+    bool getLanded() {
+        return this->isLanded;
+    }
+    
+    void setLanded(bool landed) {
+        this->isLanded = landed;
+    }
+    
+    void setAngle(double angle) {
+        this->angle = angle;
+    }
+    
+    void resetLander() {
+        Point point = Point(random(0,400), 400);
+        this->setPosition(point);
+        this->setAngle(0.0);
+        this->setLanded(false);
+        this->setVelocityX(0.0);
+        this->setVelocityY(0.0);
+        this->fuel = 5000;
+    }
 };

@@ -93,7 +93,7 @@ void drawCallback()
    
    //calls the client's display function
    assert(ui.callBack != NULL);
-   ui.callBack(&ui, ui.p, ui.ground);
+   ui.callBack(&ui, ui.p, ui.ground, ui.stars);
    
    //loop until the timer runs out
    if (!ui.isTimeToDraw())
@@ -183,7 +183,7 @@ void Interface::keyEvent(int key, bool fDown)
          isLeftPress = fDown;
          break;
       case GLUT_KEY_HOME:
-      case ' ':
+      case 32:
          isSpacePress = fDown;
          break;
    }
@@ -205,7 +205,8 @@ void Interface::keyEvent()
       isLeftPress++;
    if (isRightPress)
       isRightPress++;
-   isSpacePress = false;
+   if(isSpacePress)
+       isSpacePress++;
 }
 
 /************************************************************************
@@ -249,13 +250,14 @@ int          Interface::isDownPress  = 0;
 int          Interface::isUpPress    = 0;
 int          Interface::isLeftPress  = 0;
 int          Interface::isRightPress = 0;
-bool         Interface::isSpacePress = false;
+int         Interface::isSpacePress = 0;
 bool         Interface::initialized  = false;
 double       Interface::timePeriod   = 1.0 / 30; // default to 30 frames/second
 unsigned long Interface::nextTick     = 0;        // redraw now please
 void *       Interface::p            = NULL;
 void *       Interface::ground       = NULL;
-void (*Interface::callBack)(const Interface *, void *, void *) = NULL;
+void *       Interface::stars        = NULL;
+void (*Interface::callBack)(const Interface *, void *, void *, void *) = NULL;
 
 
 /************************************************************************
@@ -318,12 +320,13 @@ void Interface::initialize(int argc, char ** argv, const char * title, const Poi
  *                   will need to cast this back to your own data
  *                   type before using it.
  *************************************************************************/
-void Interface::run(void (*callBack)(const Interface *, void *, void *), void *p, void *ground)
+void Interface::run(void (*callBack)(const Interface *, void *, void *, void *), void *p, void *ground, void *stars)
 {
     // setup the callbacks
     this->p = p;
     this->callBack = callBack;
     this->ground = ground;
+    this->stars = stars;
     
 
    glutMainLoop();
